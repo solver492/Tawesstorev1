@@ -1,0 +1,13 @@
+{
+  "build": {
+    "command": "pnpm install && pnpm run build:prod",
+    "outputDirectory": "artifacts/tawes-store/dist/public"
+  },
+  "start": {
+    "command": "pnpm start"
+  },
+  "environment": {
+    "NODE_VERSION": "22",
+    "PNPM_VERSION": "10"
+  }
+}
