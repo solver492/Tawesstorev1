@@ -1,0 +1,63 @@
+img {
+	max-width: none !important;
+	border-radius: 5px;
+	height: 400px;
+	margin-top: 20px;
+	width: 670px;
+	cursor: pointer;
+}
+._17tem {
+	border-radius: 4px;
+	/* width: 100% !important; */
+}
+#essPrev,
+#essNext {
+	background-color: #31313379;
+	color: rgb(255, 251, 245);
+}
+._1E1nI {
+	object-fit: cover !important;
+}
+
+._2Y-TT {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: 100% 5%;
+	background-size: contain;
+	border-radius: 5px !important;
+	background-repeat: no-repeat;
+}
+
+/* Footer section router */
+.footer-desc-text > p {
+	font-size: 11.5px;
+	color: #313133;
+	margin-top: 0.5rem;
+}
+.footer-desc-text > p > span {
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.download-border {
+	border: 1px solid #fff;
+	font-size: smaller;
+}
+.download-border:hover {
+	border: 1px solid #ff9900;
+	color: #ff9900;
+}
+.font-styling > h1 {
+	font-weight: 600;
+	font-size: small;
+	margin-bottom: 10px;
+}
+.links-texts {
+	font-size: 12px;
+	margin-top: 0.3rem;
+}
+.links-texts:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
