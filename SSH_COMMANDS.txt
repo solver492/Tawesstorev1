@@ -1,0 +1,64 @@
+=== COMMANDES À COPIER-COLLER DANS SSH ===
+
+Étape 1: Se connecter
+ssh -p 65002 u696346042@147.93.54.128
+Mot de passe: denden7skY-
+
+Étape 2: Une fois connecté, copiez-collez ces commandes UNE PAR UNE:
+
+# Aller dans le répertoire home
+cd ~
+pwd
+ls -la
+
+# Trouver votre application (essayez ces commandes jusqu'à trouver le bon chemin)
+ls -la domains/
+ls -la applications/
+
+# Une fois trouvé, allez dans le dossier (AJUSTEZ LE CHEMIN selon ce que vous voyez)
+cd domains/pubastack.space/application
+# OU
+# cd applications/pubastack.space
+
+# Vérifier qu'on est au bon endroit
+pwd
+ls -la package.json
+
+# Configurer pnpm pour autoriser les scripts
+pnpm config set unsafe-perm true
+
+# Créer le fichier de configuration global
+cat > ~/.pnpmrc << 'EOF'
+unsafe-perm=true
+enable-pre-post-scripts=true
+EOF
+
+# Créer le fichier de configuration local
+cat > .pnpmrc << 'EOF'
+unsafe-perm=true
+enable-pre-post-scripts=true
+EOF
+
+# Nettoyer le cache pnpm
+rm -rf node_modules/.pnpm
+
+# Réinstaller avec force
+pnpm install --force --no-frozen-lockfile
+
+# Si l'installation réussit, builder
+export NODE_ENV=production
+export PORT=5173
+export BASE_PATH=/
+pnpm run build:prod
+
+# OU si la commande ci-dessus ne marche pas:
+pnpm --filter @workspace/tawes-store run build
+
+# Vérifier le résultat
+ls -la artifacts/tawes-store/dist/public/
+
+# Vous devriez voir index.html et des fichiers assets/
+
+=== FIN DES COMMANDES ===
+
+Si tout s'est bien passé, retournez dans le panneau Hostinger et cliquez sur "Redéployer"

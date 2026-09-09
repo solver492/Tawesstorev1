@@ -1,0 +1,38 @@
+# Commandes à exécuter une fois connecté via SSH
+
+# 1. Trouver le répertoire de l'application
+cd ~
+pwd
+ls -la
+
+# 2. Aller dans le dossier de l'application (ajustez le chemin selon ce que vous voyez)
+cd domains/pubastack.space/application
+# OU
+cd applications/pubastack.space
+# OU vérifiez avec: find ~ -name "package.json" -path "*/Tawesstorev1/*" 2>/dev/null
+
+# 3. Vérifier qu'on est dans le bon dossier
+pwd
+cat package.json | head -n 5
+
+# 4. Configurer pnpm pour autoriser les scripts
+pnpm config set unsafe-perm true
+cat > .pnpmrc << 'EOF'
+unsafe-perm=true
+enable-pre-post-scripts=true
+EOF
+
+# 5. Nettoyer et réinstaller
+rm -rf node_modules/.pnpm
+pnpm install --force --no-frozen-lockfile
+
+# 6. Builder le projet
+export NODE_ENV=production
+export PORT=5173
+export BASE_PATH=/
+pnpm run build:prod
+
+# 7. Vérifier le résultat
+ls -la artifacts/tawes-store/dist/public/
+
+# Si tout est OK, vous devriez voir index.html et des fichiers assets
