@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Tawes Store"
+description = "Marketplace responsive pour acheter des produits au détail ou en gros, avec catalogue et expérience adaptée au mobile, à la tablette et au PC."
+version = "1.0.0"
+id = "artifacts/tawes-store"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25688
+
+[services.development]
+run = "pnpm --filter @workspace/tawes-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tawes-store", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/tawes-store/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25688"
+BASE_PATH = "/"
