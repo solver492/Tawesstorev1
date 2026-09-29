@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 // Numero de la boutique au format international sans « + », renseigne par
 // VITE_WHATSAPP_NUMBER. La valeur de secours sert de garde-fou tant que
 // l'identifiant n'est pas configure.
-const DEFAULT_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "3373163772";
+const DEFAULT_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "33773163772";
 
 type Props = {
   /** Numero de la boutique, format international sans « + ». */
