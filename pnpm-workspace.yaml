@@ -74,6 +74,16 @@ onlyBuiltDependencies:
   - msw
   - unrs-resolver
 
+# pnpm 11 a supprime onlyBuiltDependencies au profit de allowBuilds. Sans cette
+# liste, l'installation s'arrete sur ERR_PNPM_IGNORED_BUILDS (esbuild) et le
+# build Hostinger echoue avant meme de compiler. Les deux formes sont
+# conservees : pnpm 10 lit la premiere, pnpm 11 la seconde.
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  msw: true
+  unrs-resolver: true
+
 overrides:
   # replit uses linux-x64 only, we can exclude all other platforms
   "esbuild>@esbuild/darwin-arm64": "-"
