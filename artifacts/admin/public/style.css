@@ -1,0 +1,200 @@
+:root {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-2: #1e222b;
+  --border: #2a2f3a;
+  --text: #e7e9ee;
+  --muted: #8b93a3;
+  --accent: #4f8cff;
+  --ok: #34c98b;
+  --warn: #f0a83a;
+  --err: #f2555a;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+h1 { font-size: 20px; margin: 0 0 6px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.error { color: var(--err); min-height: 18px; }
+.empty { color: var(--muted); padding: 24px; text-align: center; }
+
+input, select, textarea, button {
+  font: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  width: 100%;
+}
+textarea { resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+button { cursor: pointer; width: auto; font-weight: 500; }
+button:hover:not(:disabled) { filter: brightness(1.15); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.ghost { background: transparent; }
+button.danger { color: var(--err); }
+
+/* Les cases a cocher gardent leur taille : la regle « width: 100% » des
+   champs s'applique aux autres entrees seulement. */
+input[type="checkbox"] { width: 20px; height: 20px; min-height: 0; accent-color: var(--accent); }
+
+label { display: block; margin-bottom: 10px; font-size: 12px; color: var(--muted); }
+label input, label select, label textarea { margin-top: 4px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.login { display: grid; place-items: center; min-height: 100vh; padding: 16px; }
+.login-card { width: min(340px, 100%); }
+
+.topbar {
+  display: flex; align-items: center; gap: 20px;
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--bg); z-index: 10;
+}
+.brand { font-weight: 700; }
+.brand span { color: var(--muted); font-weight: 400; }
+.tabs { display: flex; gap: 6px; }
+.tabs button { background: transparent; border-color: transparent; color: var(--muted); }
+.tabs button.active { background: var(--surface-2); color: var(--text); }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.badge {
+  display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 10px;
+  background: var(--accent); color: #fff; font-size: 11px; text-align: center;
+}
+
+.pill {
+  display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 11px; border: 1px solid var(--border);
+}
+.pill-ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
+.pill-warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
+
+main { padding: 20px; }
+.tab { display: none; }
+.tab.active { display: block; }
+
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar-actions { display: flex; gap: 8px; }
+.filters { display: flex; gap: 8px; }
+
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); }
+.grid-tight { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+.pending-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.pending-body { display: grid; grid-template-columns: 130px 1fr; gap: 14px; }
+.previews { display: flex; flex-direction: column; gap: 6px; }
+.previews img { width: 130px; height: 100px; object-fit: cover; border-radius: 6px; background: var(--surface-2); }
+.video-chip {
+  padding: 6px; text-align: center; border-radius: 6px;
+  background: var(--surface-2); color: var(--muted); font-size: 12px;
+}
+.pending-actions { display: flex; gap: 8px; margin-top: 12px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: middle; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; background: var(--surface-2); }
+td select { min-width: 150px; }
+.name-cell { font-weight: 500; }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; background: var(--surface-2); }
+
+.cat-card { display: grid; gap: 8px; }
+.media-panel { margin-top: 16px; }
+.media-panel summary { cursor: pointer; font-weight: 500; }
+.media-list { list-style: none; padding: 0; display: grid; gap: 8px; margin: 12px 0; }
+.media-list li { display: flex; align-items: center; gap: 10px; }
+.media-list code { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+
+.toast {
+  position: fixed; bottom: 20px; right: 20px; padding: 12px 16px;
+  border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgb(0 0 0 / .4); z-index: 20;
+}
+.toast-err { border-color: var(--err); color: var(--err); }
+
+/* ---------- mobile ---------- */
+html { -webkit-text-size-adjust: 100%; }
+
+@media (max-width: 900px) {
+  .topbar { flex-wrap: wrap; gap: 8px 14px; padding: 10px 14px; }
+  .tabs { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { flex: 1 0 auto; white-space: nowrap; }
+  .topbar-right { margin-left: auto; }
+}
+
+@media (max-width: 760px) {
+  main { padding: 14px; }
+  .grid, .grid-tight { grid-template-columns: 1fr; }
+
+  /* La carte d'attente passe au-dessus des champs : le tactile a besoin
+     de la largeur pour saisir nom, prix et categorie. */
+  .pending-body { grid-template-columns: 1fr; }
+  .pending-head { flex-wrap: wrap; gap: 6px; }
+  .previews { flex-direction: row; flex-wrap: wrap; }
+  .previews img { width: 96px; height: 96px; }
+  .video-chip { align-self: flex-start; padding: 6px 12px; }
+
+  .toolbar { align-items: stretch; }
+  .toolbar .filters { width: 100%; }
+  .toolbar button { width: 100%; }
+  .toolbar-actions { width: 100%; }
+  .toolbar-actions button { flex: 1; width: auto; }
+
+  /* Le tableau produits devient une liste de cartes : 9 colonnes
+     illisibles sur telephone, une ligne = un produit. */
+  #products-table thead { display: none; }
+  #products-table, #products-table tbody, #products-table tr, #products-table td { display: block; }
+  #products-table tr { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  #products-table tr:last-child { border-bottom: 0; }
+  #products-table td {
+    border: 0; padding: 6px 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  #products-table td::before {
+    content: attr(data-label);
+    color: var(--muted); font-size: 12px; flex: 0 0 84px;
+  }
+  #products-table td[data-label="Selection"] { justify-content: flex-start; }
+  #products-table td[data-label="Selection"]::before { flex: 0 0 auto; }
+  #products-table td[data-label="Nom"] { font-size: 15px; }
+  #products-table td[data-label="Actions"] { justify-content: flex-start; padding-top: 10px; }
+  #products-table td[data-label="Actions"]::before { display: none; }
+  #products-table td select { min-width: 0; flex: 1; }
+  #products-table td.empty { display: block; padding: 24px 0; }
+  .thumb { width: 56px; height: 56px; }
+  .actions { gap: 8px; }
+  .actions button { flex: 1 0 auto; }
+}
+
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr; }
+  .filters { flex-direction: column; }
+  .login-card { width: min(340px, 100%); }
+  .card { padding: 14px; }
+  input, select, textarea, button { min-height: 40px; }
+  .pending-actions { flex-direction: column; }
+  .pending-actions button { width: 100%; }
+  .media-list li { flex-wrap: wrap; }
+  .media-list code { flex: 1 1 100%; }
+  .toast { left: 12px; right: 12px; bottom: 12px; }
+}

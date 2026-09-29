@@ -1,0 +1,24 @@
+{
+  "name": "@workspace/admin",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Backend de gestion : file d'attente des publications Telegram, validation, categories, carousel et video Vimeo.",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "typescript": "^5.9.3"
+  }
+}

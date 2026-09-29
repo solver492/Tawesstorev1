@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Backend de gestion — Tawes</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="login" class="login">
+      <form id="login-form" class="card login-card">
+        <h1>Backend de gestion</h1>
+        <p class="muted">Validation des publications Telegram, categories, carousel et video.</p>
+        <input id="password" type="password" placeholder="Mot de passe" autocomplete="current-password" required />
+        <button type="submit">Se connecter</button>
+        <p id="login-error" class="error"></p>
+      </form>
+    </div>
+
+    <div id="app" hidden>
+      <header class="topbar">
+        <div class="brand">Tawes <span>· gestion</span></div>
+        <nav class="tabs">
+          <button data-tab="pending" class="active">File d'attente <span id="badge-pending" class="badge">0</span></button>
+          <button data-tab="products">Produits</button>
+          <button data-tab="categories">Categories</button>
+        </nav>
+        <div class="topbar-right">
+          <span id="vimeo-state" class="pill pill-warn"></span>
+          <button id="logout" class="ghost">Deconnexion</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="tab-pending" class="tab active">
+          <div class="toolbar">
+            <p class="muted">Publications detectees sur Telegram. Complete ce qui manque puis publie.</p>
+            <button id="refresh-pending" class="ghost">Actualiser</button>
+          </div>
+          <div id="pending-list" class="grid"></div>
+        </section>
+
+        <section id="tab-products" class="tab">
+          <div class="toolbar">
+            <div class="filters">
+              <select id="filter-status">
+                <option value="">Tous les statuts</option>
+                <option value="pending">A valider</option>
+                <option value="published">Publies</option>
+                <option value="draft">Brouillons</option>
+              </select>
+              <select id="bulk-category"><option value="">Deplacer la selection vers...</option></select>
+            </div>
+            <div class="toolbar-actions">
+              <button id="select-all" class="ghost">Tout selectionner</button>
+              <button id="refresh-products" class="ghost">Actualiser</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="products-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all" /></th>
+                  <th>Visuel</th>
+                  <th>Nom</th>
+                  <th>Categorie</th>
+                  <th>Gros</th>
+                  <th>Vente</th>
+                  <th>Medias</th>
+                  <th>Etat</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="tab-categories" class="tab">
+          <div class="toolbar"><p class="muted">Organise les categories et renomme-les si besoin.</p>
+            <button id="refresh-categories" class="ghost">Actualiser</button>
+          </div>
+          <div id="categories-list" class="grid grid-tight"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
