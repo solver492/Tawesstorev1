@@ -142,7 +142,7 @@ Pour toute question ou problème :
 
 ## ✅ Procédure vérifiée (2026-09-29)
 
-Deux sites distincts, deux stratégies de build不同的. Ne pas mélanger les deux.
+Deux sites distincts, deux stratégies de build différentes. Ne pas mélanger les deux.
 
 ### Backend de gestion — `gestion-tawes.pubstack.space`
 
