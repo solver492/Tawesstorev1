@@ -137,3 +137,43 @@ Pour toute question ou problème :
 1. Consultez la documentation Hostinger
 2. Vérifiez la documentation Supabase
 3. Consultez les logs de l'application dans le panneau Hostinger
+
+---
+
+## ✅ Procédure vérifiée (2026-09-29)
+
+Deux sites distincts, deux stratégies de build不同的. Ne pas mélanger les deux.
+
+### Backend de gestion — `gestion-tawes.pubstack.space`
+
+| Champ | Valeur |
+| --- | --- |
+| Type d'application | `express` |
+| Node | `22` |
+| Root directory | `artifacts/admin` |
+| Entry file | `src/server.js` |
+| Build script | `build` (`node --check src/server.js`) |
+| Package manager | `npm` |
+
+Variables d'environnement (API `PUT .../nodejs/builds/settings/env`, **remplace tout** l'ensemble) :
+`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `ADMIN_PASSWORD`, `MARGIN_DH`, `ADMIN_ALLOWED_ORIGIN`, `NODE_ENV`.
+`PORT` est fourni par l'hébergeur, ne pas le définir.
+
+### Boutique — `pubstack.space`
+
+**Le build Git échoue systématiquement sur cet hébergeur** : l'installation des dépendances
+du monorepo s'arrête sur `spawnSync .../esbuild/bin/esbuild EACCES` (le binaire natif esbuild
+n'est pas exécutable dans le répertoire de build). Aucun réglage pnpm (`allowBuilds`,
+`onlyBuiltDependencies`) ne corrige cela.
+
+Déploiement utilisé à la place — build local + archive pré-construite :
+
+1. `pnpm run build` en local (le bundle contient `VITE_SUPABASE_ANON_KEY`).
+2. Copier `artifacts/tawes-store/dist/public` + un `package.json` minimal dont le script
+   `build` est un no-op, puis `tar -czf boutique.tar.gz`.
+3. Upload TUS de l'archive dans `public_html` (`POST /api/hosting/v1/files/upload-urls`).
+4. `POST /api/hosting/v1/accounts/{u}/websites/pubstack.space/nodejs/builds` avec
+   `source_type: "archive"`, `archive_path: "boutique.tar.gz"`, `app_type: "other"`,
+   `output_directory: "."`.
+
+Le site est ensuite servi en statique, sans processus Node.
