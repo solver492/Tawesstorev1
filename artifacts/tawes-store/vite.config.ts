@@ -8,13 +8,9 @@ const runtimeErrorOverlay = () => ({
   name: 'runtime-error-overlay-stub',
 });
 
-const rawPort = process.env.PORT;
-
-if (!rawPort) {
-  throw new Error(
-    'PORT environment variable is required but was not provided.',
-  );
-}
+// PORT ne sert qu'au serveur de dev et a l'apercu : le build doit reussir
+// sans variable d'environnement (CI, hebergement, build local).
+const rawPort = process.env.PORT ?? '5173';
 
 const port = Number(rawPort);
 
@@ -22,13 +18,7 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    'BASE_PATH environment variable is required but was not provided.',
-  );
-}
+const basePath = process.env.BASE_PATH ?? '/';
 
 export default defineConfig({
   base: basePath,
